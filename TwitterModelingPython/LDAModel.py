@@ -1,9 +1,11 @@
+import nltk
 import pandas as pd
 import gensim
 from nltk.stem import WordNetLemmatizer
 from nltk.stem.porter import *
 import pickle
 from multiprocessing import freeze_support
+nltk.download('wordnet')
 
 if __name__ == '__main__':
     # add freeze support for multiprocessing LDA Multicore
@@ -40,11 +42,12 @@ if __name__ == '__main__':
 
     def create_bow_corpus_dict(filename_bow, filename_dictionary):
         # read in the tweets
-        df = pd.read_csv("tweets.csv", encoding='utf8')
+        df = pd.read_csv("tweets.csv", error_bad_lines=False)
         # add an index column
         df["index"] = df.index
         # make a copy of the dataframe
         documents = df.copy()
+        print(len(documents))
 
         # map a tweet to a processed tweet
         processed_docs = prepare_docs(documents)
@@ -65,13 +68,13 @@ if __name__ == '__main__':
     filename_dict = 'dict.sav'
 
     # create the bow corpus and dictionary
-    # create_bow_corpus_dict(filename_bow_corpus, filename_dict)
+    create_bow_corpus_dict(filename_bow_corpus, filename_dict)
 
     bow_corpus = pickle.load(open(filename_bow_corpus, 'rb'))
     dictionary = pickle.load(open(filename_dict, 'rb'))
 
     # train the model and save it
-    # train_lda(bow_corpus, dictionary, filename)
+    train_lda(bow_corpus, dictionary, filename)
 
     # load the before saved model
     lda_model = pickle.load(open(filename, 'rb'))

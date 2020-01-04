@@ -26,9 +26,9 @@ api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, 
 # export_csv = df.to_csv(r'tweets.csv', index=None, header=True)
 
 # read in the tweets from before
-df = pd.read_csv("tweets.csv", encoding='utf8')
+df = pd.read_csv("tweets.csv", encoding="utf-8", error_bad_lines=False)
 
-for tweet in tweepy.Cursor(api.search, q='a', count=20, lang='en', since='2017-06-20', tweet_mode='extended').items():
+for tweet in tweepy.Cursor(api.search, q='*', count=20, lang='en', since='2017-06-20', tweet_mode='extended').items():
     print(tweet._json)
     # if the tweet is a retweet then add the original tweet to the dataset otherwise add the tweet
     if "retweeted_status" in tweet._json:
