@@ -22,8 +22,8 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
 
 # when running the first create an empty dataframe for the tweets
-# df = pd.DataFrame(columns=['tweet'])
-# export_csv = df.to_csv(r'tweets.csv', index=None, header=True)
+df = pd.DataFrame(columns=['tweet'])
+export_csv = df.to_csv(r'tweets.csv', index=None, header=True)
 
 # read in the tweets from before
 df = pd.read_csv("tweets.csv", encoding="utf-8", error_bad_lines=False)
