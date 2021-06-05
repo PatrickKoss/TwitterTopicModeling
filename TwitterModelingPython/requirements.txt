@@ -33,7 +33,7 @@ phue==1.1
 pipwin==0.4.6
 pluggy==0.13.1
 protobuf==3.11.2
-py==1.8.0
+py==1.10.0
 PyAudio==0.2.11
 pycparser==2.19
 pyjsparser==2.7.1
